@@ -88,7 +88,7 @@ const loadNewsHeadingDetaile=(code)=>{
   fetch(url)
   .then(res=>res.json())
   .then(data=>displaySingleNews(data.data))
-  displayAllNews()
+  // displayAllNews()
 }
 
 
@@ -96,7 +96,7 @@ const loadAllNews=(news_id)=>{
   const url =(`https://openapi.programming-hero.com/api/news/${news_id}`)
   fetch(url)
   .then(res=>res.json())
-  .then(data =>displayAllNews(data))
+  .then(data =>displayAllNews(data.data))
 }
 const displaySingleNews=newses=>{
   const card = document.getElementById('news-container');
@@ -132,12 +132,10 @@ const displaySingleNews=newses=>{
   }
 }
 const displayAllNews = newses=>{
-  const modaltitle= document.getElementById('newsDetailModalLabel');
-  for (const news of newses){
-    console.log(news)
-    modaltitle.innerText=news.author.name;
-  }
- 
+  const modalTitle = document.getElementById('newsDetailModalLabel')
+ for (const news of newses){
+  modalTitle.innerText= news.author.name;
+ }
 }
 
 loadNewsHeading()
