@@ -67,7 +67,7 @@ const loadNewsHeading=()=>{
 const displayNewsHeadings =(newses)=>{
   const navbar = document.getElementById('nav-bar');
 newses.forEach(news => {
-  console.log(news)
+  // console.log(news)
   const ul = document.createElement('ul');
     ul.classList.add('list-unstyled','p-3')
     
@@ -88,6 +88,7 @@ const loadNewsHeadingDetaile=(code)=>{
   fetch(url)
   .then(res=>res.json())
   .then(data=>displaySingleNews(data.data))
+  displayAllNews()
 }
 
 
@@ -95,18 +96,18 @@ const loadAllNews=(news_id)=>{
   const url =(`https://openapi.programming-hero.com/api/news/${news_id}`)
   fetch(url)
   .then(res=>res.json())
-  .then(data =>displaySingleNews(data))
+  .then(data =>displayAllNews(data))
 }
 const displaySingleNews=newses=>{
   const card = document.getElementById('news-container');
  card.innerHTML=''
   for(const news of newses){
     
-    console.log(news)
+    // console.log(news)
     const newsdiv = document.createElement('div');
     newsdiv.classList.add('col');
     newsdiv.innerHTML=`
-    <div onclick="loadAllNews('${news._id}')" class="card">
+    <div  class="card">
     <img src="${news.image_url}" class="img-fluid card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${news.title}</h5>
@@ -117,9 +118,9 @@ const displaySingleNews=newses=>{
       <p>${news.author.name}</p>
       <p>${news.author.published_date}</p></div>
       <p> view: ${news.total_view}</p>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">
-    Show More
-  </button>
+      <button onclick="loadAllNews('${news._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">
+      Show More
+    </button>
     </div>
     
    
@@ -129,6 +130,14 @@ const displaySingleNews=newses=>{
     card.appendChild(newsdiv)
 
   }
+}
+const displayAllNews = newses=>{
+  const modaltitle= document.getElementById('newsDetailModalLabel');
+  for (const news of newses){
+    console.log(news)
+    modaltitle.innerText=news.author.name;
+  }
+ 
 }
 
 loadNewsHeading()
