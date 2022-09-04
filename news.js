@@ -26,7 +26,7 @@ newses.forEach(news => {
 }
 
 const loadNewsHeadingDetaile=(code)=>{
-  // console.log('ami paisi',code)
+  
   const url=(`https://openapi.programming-hero.com/api/news/category/${code}`)
   // console.log(url)
   fetch(url)
@@ -83,7 +83,7 @@ const displayAllNews = newses=>{
   const modalTitle = document.getElementById('newsDetailModalLabel');
   const newDetaile = document.getElementById('news-detaile')
  for (const news of newses){
-  console.log(news)
+  // console.log(news)
   modalTitle.innerText= news.author.name ? news.author.name : 'no name found';
   newDetaile.innerHTML=`
   <img class="w-25" src="${news.author.img}">
