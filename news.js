@@ -5,6 +5,7 @@ const loadNewsHeading=()=>{
   .then(res=>res.json())
   .then(data=>displayNewsHeadings(data.data.news_category))
   .catch(error => console.log(error))
+ 
 }
 const displayNewsHeadings =(newses)=>{
   const navbar = document.getElementById('nav-bar');
@@ -19,8 +20,9 @@ newses.forEach(news => {
           <a onclick="loadNewsHeadingDetaile('${news.category_id}')" id="nav" class="nav-link active" aria-current="page" href="#">${news.category_name}</a>
         </li>`
         navbar.appendChild(ul)
-  
+        
 })
+
 }
 
 const loadNewsHeadingDetaile=(code)=>{
@@ -32,6 +34,7 @@ const loadNewsHeadingDetaile=(code)=>{
   .then(data=>displaySingleNews(data.data))
   .catch(error => console.log(error))
   // displayAllNews()
+  toggoleSpiner(true)
 }
 
 
@@ -72,8 +75,9 @@ const displaySingleNews=newses=>{
   </div>
     `;
     card.appendChild(newsdiv)
-
+    toggoleSpiner(false)
   }
+  
 }
 const displayAllNews = newses=>{
   const modalTitle = document.getElementById('newsDetailModalLabel');
@@ -88,6 +92,16 @@ const displayAllNews = newses=>{
    <p>Details: ${news.details? news.details : 'no detaile found'}
   `
  }
+}
+const toggoleSpiner= isLoading=> {
+  const spinner = document.getElementById('loader')
+  if(isLoading){
+    spinner.classList.remove('d-none')
+  }
+  else{
+    spinner.classList.add('d-none')
+  }
+ 
 }
 
 loadNewsHeading()
