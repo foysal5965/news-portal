@@ -132,9 +132,17 @@ const displaySingleNews=newses=>{
   }
 }
 const displayAllNews = newses=>{
-  const modalTitle = document.getElementById('newsDetailModalLabel')
+  const modalTitle = document.getElementById('newsDetailModalLabel');
+  const newDetaile = document.getElementById('news-detaile')
  for (const news of newses){
-  modalTitle.innerText= news.author.name;
+  console.log(news)
+  modalTitle.innerText= news.author.name ? news.author.name : 'no name found';
+  newDetaile.innerHTML=`
+  <img class="w-25" src="${news.author.img}">
+   <p>Release Date:${news.author.published_date ? news.author.published_date : 'no data found'}</p>
+   <p>total View: ${news.total_view ? news.total_view : 'no data found'}</p>
+   <p>Details: ${news.details? news.details : 'no detaile found'}
+  `
  }
 }
 
