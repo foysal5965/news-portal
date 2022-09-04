@@ -1,68 +1,10 @@
-// const loadNews =async()=>{
-//   const url =`https://openapi.programming-hero.com/api/news/categories`;
-//   const response = await fetch(url);
-//   const data = await response.json()
-//   displayNews(data.data.news_category)
-// }
 
-// const displayNews =newses=>{
-//   const navbar = document.getElementById('nav-bar');
-//   newses.forEach(news =>{
-//     const ul = document.createElement('ul');
-//     ul.classList.add('list-unstyled','p-3')
-    
-//     ul.innerHTML=`
-    
-//           <li class="nav-item">
-//           <a onclick="loadNewsDynamic()" id="nav" class="nav-link active" aria-current="page" href="#">${news.category_name}</a>
-//         </li>`
-//         navbar.appendChild(ul)
-//   })
-// }
-// const loadNewsDynamic=category_name=>{
-//   const url = `https://openapi.programming-hero.com/api/news/${category_name}`;
-//   fetch(url)
-//   .then(res=>res.json())
-//   .then(data=>console.log(data))
-// }
-// const loadSinglenews = async(news_id)=>{
-//   const url= `https://openapi.programming-hero.com/api/news/category/${news_id}`;
-//   const response = await fetch(url);
-//   const data = await response.json();
-//   displaySingleNews(data.data)
-// }
-// const displaySingleNews =(singles)=>{
-//   const card = document.getElementById('news-container');
-//   // console.log(singles)
-//   console.log(singles)
- 
-//   singles.forEach(single=>{
-    
-//     const newsdiv = document.createElement('div');
-//     newsdiv.classList.add('col');
-//     newsdiv.innerHTML=`
-//     <div class="card">
-//     <img src="${single.thumbnail_url}" class="card-img-top" alt="...">
-//     <div class="card-body">
-//       <h5 class="card-title">Card title</h5>
-//       <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-//     </div>
-//   </div>
-//     `;
-//     card.appendChild(newsdiv)
-//   })
-// }
-
-
-
-// loadSinglenews()
-
-// loadNews()
 
 const loadNewsHeading=()=>{
   fetch(`https://openapi.programming-hero.com/api/news/categories`)
   .then(res=>res.json())
   .then(data=>displayNewsHeadings(data.data.news_category))
+  .catch(error => console.log(error))
 }
 const displayNewsHeadings =(newses)=>{
   const navbar = document.getElementById('nav-bar');
@@ -88,6 +30,7 @@ const loadNewsHeadingDetaile=(code)=>{
   fetch(url)
   .then(res=>res.json())
   .then(data=>displaySingleNews(data.data))
+  .catch(error => console.log(error))
   // displayAllNews()
 }
 
@@ -97,6 +40,7 @@ const loadAllNews=(news_id)=>{
   fetch(url)
   .then(res=>res.json())
   .then(data =>displayAllNews(data.data))
+  .catch(error=> console.log(error))
 }
 const displaySingleNews=newses=>{
   const card = document.getElementById('news-container');
